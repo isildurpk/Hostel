@@ -60,6 +60,7 @@
       <DependentUpon>UiResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainVm.cs" />
+    <Compile Include="ViewModels\Students\StudentCardVm.cs" />
     <Compile Include="ViewModels\Students\StudentWorkspaceVm.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,12 +26,15 @@ namespace HostelPortable.ViewModels.Students
 
             DisplayName = UiResources.StudentWorkspaceName;
 
+            EditCommand = RelayCommandBase.FromAsyncHandler(EditAsync, CanEdit, this);
             RefreshCommand = RelayCommandBase.FromAsyncHandler(RefreshAsync);
         }
 
         #endregion
 
         #region Commands
+
+        public ICommand EditCommand { get; private set; }
 
         public ICommand RefreshCommand { get; private set; }
 
@@ -44,6 +47,20 @@ namespace HostelPortable.ViewModels.Students
         #endregion
 
         #region Command`s methods
+
+        private async Task EditAsync()
+        {
+            using (var vm = GetViewModel<StudentCardVm>())
+            {
+                vm.Initialize(StudentsVm.SelectedItem.Id);
+                await vm.ShowAsync();
+            }
+        }
+
+        private bool CanEdit()
+        {
+            return StudentsVm?.SelectedItem != null;
+        }
 
         private async Task RefreshAsync()
         {

@@ -6,7 +6,6 @@
              xmlns:students="clr-namespace:HostelPortable.ViewModels.Students;assembly=HostelPortable"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance students:StudentWorkspaceVm}"
              d:DesignHeight="300" d:DesignWidth="600">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,15 +20,10 @@
             <ToolBar OverflowMode="Never">
                 <StackPanel Orientation="Horizontal">
 
-                    <!--<Button Command="{Binding AddCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
-                            ToolTip="Добавить">
-                        <Image Source="/Hostel;component/Resources/Img/24/add.png" />
-                    </Button>
-
-                    <Button Command="{Binding OpenStudentCardCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                    <Button Command="{Binding EditCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
                             ToolTip="Редактировать">
                         <Image Source="/Hostel;component/Resources/Img/24/edit.png" />
-                    </Button>-->
+                    </Button>
 
                     <Button Command="{Binding RefreshCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
                             ToolTip="Обновить">
@@ -40,8 +34,7 @@
             </ToolBar>
         </ToolBarTray>
 
-        <DataGrid Grid.Row="1" DataContext="{Binding StudentsVm}" Style="{StaticResource DefaultGridStyle}"
-                  RowStyle="{StaticResource DeletedRowStyle}">
+        <DataGrid Grid.Row="1" DataContext="{Binding StudentsVm}" Style="{StaticResource DefaultGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding FullName}" Header="ФИО" />
                 <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Номер комнаты" />

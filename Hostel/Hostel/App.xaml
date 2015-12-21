@@ -129,8 +129,9 @@
         </Style>
 
         <Style TargetType="TextBlock" x:Key="CaptionTextBlockStyle" BasedOn="{StaticResource EditorTextBlockStyle}">
-            <Setter Property="FontWeight" Value="Black" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="UltraLight" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextDecorations" Value="Underline" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="SubCaptionTextBlockStyle" BasedOn="{StaticResource EditorTextBlockStyle}">
@@ -139,6 +140,11 @@
 
         <Style TargetType="TextBox" x:Key="EditorTextBoxStyle">
             <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="EditorRadioButtonStyle">
+            <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
     </Application.Resources>

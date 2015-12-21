@@ -70,6 +70,15 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Карточка студента.
+        /// </summary>
+        internal static string StudentCardName {
+            get {
+                return ResourceManager.GetString("StudentCardName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Студенты.
         /// </summary>
         internal static string StudentWorkspaceName {
