@@ -120,4 +120,7 @@
   <data name="DefaultBusyMessage" xml:space="preserve">
     <value>Загрузка...</value>
   </data>
+  <data name="StudentWorkspaceName" xml:space="preserve">
+    <value>Студенты</value>
+  </data>
 </root>

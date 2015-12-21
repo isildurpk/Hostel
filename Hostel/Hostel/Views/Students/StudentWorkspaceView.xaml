@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Hostel.Views.Students.StudentWorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:students="clr-namespace:HostelPortable.ViewModels.Students;assembly=HostelPortable"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance students:StudentWorkspaceVm}"
+             d:DesignHeight="300" d:DesignWidth="600">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ToolBarTray Style="{StaticResource DefaultToolBarTrayStyle}" IsLocked="True">
+            <ToolBarTray.Resources>
+                <Style TargetType="Image" BasedOn="{StaticResource ToolBarImageStyle}" />
+            </ToolBarTray.Resources>
+
+            <ToolBar OverflowMode="Never">
+                <StackPanel Orientation="Horizontal">
+
+                    <!--<Button Command="{Binding AddCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            ToolTip="Добавить">
+                        <Image Source="/Hostel;component/Resources/Img/24/add.png" />
+                    </Button>
+
+                    <Button Command="{Binding OpenStudentCardCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            ToolTip="Редактировать">
+                        <Image Source="/Hostel;component/Resources/Img/24/edit.png" />
+                    </Button>-->
+
+                    <Button Command="{Binding RefreshCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            ToolTip="Обновить">
+                        <Image Source="/Hostel;component/Resources/Img/24/refresh.png" />
+                    </Button>
+
+                </StackPanel>
+            </ToolBar>
+        </ToolBarTray>
+
+        <DataGrid Grid.Row="1" DataContext="{Binding StudentsVm}" Style="{StaticResource DefaultGridStyle}"
+                  RowStyle="{StaticResource DeletedRowStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding FullName}" Header="ФИО" />
+                <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Номер комнаты" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

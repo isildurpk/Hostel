@@ -87,9 +87,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Students\StudentWorkspaceView.xaml.cs">
+      <DependentUpon>StudentWorkspaceView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Students\StudentWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +132,16 @@
       <Project>{01e1cb6f-4beb-492a-95b0-c1be07548312}</Project>
       <Name>HostelPortable</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Img\24\add.png" />
+    <Resource Include="Resources\Img\24\delete.png" />
+    <Resource Include="Resources\Img\24\edit.png" />
+    <Resource Include="Resources\Img\24\left arrow.png" />
+    <Resource Include="Resources\Img\24\office.png" />
+    <Resource Include="Resources\Img\24\refresh.png" />
+    <Resource Include="Resources\Img\24\stack.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

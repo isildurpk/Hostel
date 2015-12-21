@@ -16,6 +16,9 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Выход" Command="{Binding CloseCommand}" />
             </MenuItem>
+            <MenuItem Header="Данные">
+                <MenuItem Header="Студенты" Command="{Binding OpenStudentsCommand}" />
+            </MenuItem>
         </Menu>
 
         <TabControl Grid.Row="1" ItemsSource="{Binding ItemsSource}" Background="White"

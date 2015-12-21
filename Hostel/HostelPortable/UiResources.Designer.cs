@@ -68,5 +68,14 @@ namespace HostelPortable {
                 return ResourceManager.GetString("DefaultBusyMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Студенты.
+        /// </summary>
+        internal static string StudentWorkspaceName {
+            get {
+                return ResourceManager.GetString("StudentWorkspaceName", resourceCulture);
+            }
+        }
     }
 }
