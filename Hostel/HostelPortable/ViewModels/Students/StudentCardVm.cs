@@ -19,11 +19,23 @@ namespace HostelPortable.ViewModels.Students
 
         #endregion
 
+        #region Properties
+
+        public bool IsNewRecord { get; private set; }
+
+        #endregion
+
         #region Methods
 
-        public void Initialize(int studentId)
+        public void Initialize(int? studentId = null)
         {
-            _studentId = studentId;
+            if (studentId == null)
+            {
+                IsNewRecord = true;
+                return;
+            }
+
+            _studentId = studentId.Value;
         }
 
         #endregion

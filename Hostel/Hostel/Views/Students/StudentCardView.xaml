@@ -110,7 +110,7 @@
                      Text="" />
         </Grid>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0 16 0 0">
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0 16 0 0" IsEnabled="{DataBinding '!IsNewRecord'}">
             <TextBlock Text="Проживание" Style="{StaticResource CaptionTextBlockStyle}" />
 
             <DataGrid Height="145" Style="{StaticResource DefaultGridStyle}">

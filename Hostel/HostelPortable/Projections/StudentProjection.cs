@@ -8,6 +8,6 @@ namespace HostelPortable.Projections
 
         public string FullName { get; set; }
 
-        public int RoomNumber { get; set; }
+        public int? RoomNumber { get; set; }
     }
 }
