@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Infrastructure\Repository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="PortableModule.cs" />
     <Compile Include="Projections\StudentProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using Hostel.Properties;
+using HostelPortable.Infrastructure;
+using HostelPortable.Interfaces;
 using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces;
 using MugenMvvmToolkit.Models;
@@ -23,6 +25,8 @@ namespace Hostel
 
         protected override bool LoadInternal()
         {
+            IocContainer.Bind<IRepository, Repository>(DependencyLifecycle.TransientInstance);
+
             IocContainer.BindToMethod(CreateConnection, DependencyLifecycle.TransientInstance);
             return true;
         }
