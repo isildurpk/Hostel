@@ -30,7 +30,7 @@
         <Style x:Key="ErrorTemplate" TargetType="Control">
             <Setter Property="Validation.ErrorTemplate" Value="{StaticResource SampleErrorTemplate}" />
         </Style>
-
+        
         <Style x:Key="DefaultGridStyle" TargetType="DataGrid">
             <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
             <Setter Property="SelectedItem"
