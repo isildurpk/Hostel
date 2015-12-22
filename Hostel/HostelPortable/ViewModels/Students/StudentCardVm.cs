@@ -1,5 +1,9 @@
-﻿using HostelPortable.Interfaces;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using HostelPortable.Interfaces;
 using HostelPortable.Projections;
+using MugenMvvmToolkit.Collections;
+using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
 
 namespace HostelPortable.ViewModels.Students
@@ -9,6 +13,7 @@ namespace HostelPortable.ViewModels.Students
         #region Fields
 
         private readonly IRepository _repository;
+        //private readonly TrackingCollection _trackingCollection = new TrackingCollection();
 
         private int _studentId;
 
@@ -19,8 +24,19 @@ namespace HostelPortable.ViewModels.Students
         public StudentCardVm(IRepository repository)
         {
             _repository = repository;
+
             DisplayName = UiResources.StudentCardName;
+
+            ApplyCommand = RelayCommandBase.FromAsyncHandler(ApplyAsync, CanApply, this);
         }
+
+        #endregion
+
+        #region Commands
+
+        public ICommand ApplyCommand { get; private set; }
+
+        public ICommand CancelCommand { get; private set; }
 
         #endregion
 
@@ -35,6 +51,29 @@ namespace HostelPortable.ViewModels.Students
         public bool IsNewRecord { get; private set; }
 
         public StudentCardProjection Student { get; private set; }
+
+        #endregion
+
+        #region Command`s methods
+
+        private async Task ApplyAsync()
+        {
+            await _repository.UpdateStudentCardAsync(_studentId, Student).WithBusyIndicator(this);
+        }
+
+        private bool CanApply()
+        {
+            return true;
+        }
+
+        private void Cancel()
+        {
+        }
+
+        private bool CanCancel()
+        {
+            return false;
+        }
 
         #endregion
 

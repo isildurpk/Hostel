@@ -7,126 +7,155 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance students:StudentCardVm}"
              d:DesignHeight="600" d:DesignWidth="800">
 
-    <Grid Margin="16 0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" IsSharedSizeScope="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="Auto" SharedSizeGroup="Group" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <ToolBarTray Style="{StaticResource DefaultToolBarTrayStyle}" IsLocked="True">
+            <ToolBarTray.Resources>
+                <Style TargetType="Image" BasedOn="{StaticResource ToolBarImageStyle}" />
+            </ToolBarTray.Resources>
+
+            <ToolBar OverflowMode="Never">
+                <StackPanel Orientation="Horizontal">
+
+                    <Button Command="{Binding ApplyCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            ToolTip="Сохранить">
+                        <Image Source="/Hostel;component/Resources/Img/24/apply.png" />
+                    </Button>
+
+                    <Button Command="{Binding CancelCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            ToolTip="Отменить">
+                        <Image Source="/Hostel;component/Resources/Img/24/cancel.png" />
+                    </Button>
+
+                </StackPanel>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid Grid.Row="1" Margin="16 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Паспортные данные"
+            <Grid Grid.Row="0" IsSharedSizeScope="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Group" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Паспортные данные"
                        Style="{StaticResource CaptionTextBlockStyle}" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Фамилия:" Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Фамилия:" Style="{StaticResource EditorTextBlockStyle}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.Passport.LastName, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Имя:" Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Имя:" Style="{StaticResource EditorTextBlockStyle}" />
+                <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.Passport.FirstName, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Отчество:" Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Отчество:" Style="{StaticResource EditorTextBlockStyle}" />
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.Passport.MiddleName, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата рождения:" Style="{StaticResource EditorTextBlockStyle}" />
-            <DatePicker Grid.Row="4" Grid.Column="1" Style="{StaticResource EditorDatePickerStyle}"
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата рождения:" Style="{StaticResource EditorTextBlockStyle}" />
+                <DatePicker Grid.Row="4" Grid.Column="1" Style="{StaticResource EditorDatePickerStyle}"
                         SelectedDate="{DataBinding Student.Passport.BirthDate, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="Пол:" Style="{StaticResource EditorTextBlockStyle}" />
-            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                <RadioButton Content="Мужской" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Пол:" Style="{StaticResource EditorTextBlockStyle}" />
+                <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="Мужской" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
                              IsChecked="{DataBinding IsMale, Mode=TwoWay}" />
-                <RadioButton Content="Женский" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
+                    <RadioButton Content="Женский" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
                              Margin="16 3 3 3" />
-            </StackPanel>
+                </StackPanel>
 
-            <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="Group" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Group" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Серия:" Style="{StaticResource EditorTextBlockStyle}" />
-                <TextBox Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
+                    <TextBlock Grid.Column="0" Text="Серия:" Style="{StaticResource EditorTextBlockStyle}" />
+                    <TextBox Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
                          Text="{DataBinding Student.Passport.Series, Mode=TwoWay}" />
 
-                <TextBlock Grid.Column="2" Text="Номер:" Style="{StaticResource EditorTextBlockStyle}" />
-                <TextBox Grid.Column="3" Style="{StaticResource EditorTextBoxStyle}"
+                    <TextBlock Grid.Column="2" Text="Номер:" Style="{StaticResource EditorTextBlockStyle}" />
+                    <TextBox Grid.Column="3" Style="{StaticResource EditorTextBoxStyle}"
                          Text="{DataBinding Student.Passport.Number, Mode=TwoWay}" />
-            </Grid>
+                </Grid>
 
 
-            <TextBlock Grid.Row="2" Grid.Column="3" Text="Когда выдан:" Style="{StaticResource EditorTextBlockStyle}" />
-            <DatePicker Grid.Row="2" Grid.Column="4" Style="{StaticResource EditorDatePickerStyle}"
+                <TextBlock Grid.Row="2" Grid.Column="3" Text="Когда выдан:" Style="{StaticResource EditorTextBlockStyle}" />
+                <DatePicker Grid.Row="2" Grid.Column="4" Style="{StaticResource EditorDatePickerStyle}"
                         SelectedDate="{DataBinding Student.Passport.IssueDate, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="3" Grid.Column="3" Text="Кем выдан:" Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="3" Grid.Column="4" Style="{StaticResource EditorTextBoxStyle}"
+                <TextBlock Grid.Row="3" Grid.Column="3" Text="Кем выдан:" Style="{StaticResource EditorTextBlockStyle}" />
+                <TextBox Grid.Row="3" Grid.Column="4" Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.Passport.IssuedBy, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Данные студента" Margin="3 16 3 3"
+                <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Данные студента" Margin="3 16 3 3"
                        Style="{StaticResource CaptionTextBlockStyle}" />
 
-            <TextBlock Grid.Row="7" Grid.Column="0" Text="Медицинская справка:"
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Медицинская справка:"
                        Style="{StaticResource EditorTextBlockStyle}"
                        TextWrapping="Wrap" />
-            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
-                <RadioButton Content="Есть" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Medical" />
-                <RadioButton Content="Нет" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Medical"
+                <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="Есть" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Medical" />
+                    <RadioButton Content="Нет" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Medical"
                              Margin="16 3 3 3" />
-            </StackPanel>
+                </StackPanel>
 
-            <TextBlock Grid.Row="8" Grid.Column="0" Text="Номер телефона:"
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="Номер телефона:"
                        Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
+                <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.Phone, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="9" Grid.Column="0" Text="Номер автомобиля:"
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="Номер автомобиля:"
                        Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
+                <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.NumberOfAuto, Mode=TwoWay}" />
 
-            <TextBlock Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Text="Комментарий:"
+                <TextBlock Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Text="Комментарий:"
                        Style="{StaticResource EditorTextBlockStyle}" />
-            <TextBox Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                <TextBox Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
                      Style="{StaticResource EditorTextBoxStyle}"
                      Text="{DataBinding Student.Comment, Mode=TwoWay}" />
-        </Grid>
+            </Grid>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0 16 0 0"
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0 16 0 0"
                     IsEnabled="{DataBinding '!IsNewRecord'}">
-            <TextBlock Text="Проживание" Style="{StaticResource CaptionTextBlockStyle}" />
+                <TextBlock Text="Проживание" Style="{StaticResource CaptionTextBlockStyle}" />
 
-            <DataGrid Height="145" Style="{StaticResource DefaultGridStyle}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Комната" />
-                    <DataGridTextColumn Header="Дата заселения" />
-                    <DataGridTextColumn Header="Дата выселения" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+                <DataGrid Height="145" Style="{StaticResource DefaultGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Комната" />
+                        <DataGridTextColumn Header="Дата заселения" />
+                        <DataGridTextColumn Header="Дата выселения" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

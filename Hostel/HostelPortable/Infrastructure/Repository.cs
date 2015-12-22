@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using HostelPortable.Interfaces;
 using HostelPortable.Projections;
+using MugenMvvmToolkit;
 
 namespace HostelPortable.Infrastructure
 {
@@ -56,6 +57,39 @@ namespace HostelPortable.Infrastructure
                         },
                         new { studentId },
                         commandType: CommandType.StoredProcedure).SingleOrDefault();
+                }
+            });
+        }
+
+        public Task UpdateStudentCardAsync(int studentId, StudentCardProjection projection)
+        {
+            Should.NotBeNull(projection, nameof(projection));
+            Should.NotBeNull(projection.Passport, nameof(projection.Passport));
+
+            return Task.Factory.StartNew(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    conn.Open();
+                    conn.Execute("UpdateStudentCard",
+                        new
+                        {
+                            studentId,
+                            projection.MedicalExamination,
+                            projection.Phone,
+                            projection.NumberOfAuto,
+                            projection.Comment,
+                            projection.Passport.LastName,
+                            projection.Passport.FirstName,
+                            projection.Passport.MiddleName,
+                            projection.Passport.BirthDate,
+                            projection.Passport.SexId,
+                            projection.Passport.Series,
+                            projection.Passport.Number,
+                            projection.Passport.IssueDate,
+                            projection.Passport.IssuedBy
+                        },
+                        commandType: CommandType.StoredProcedure);
                 }
             });
         }
