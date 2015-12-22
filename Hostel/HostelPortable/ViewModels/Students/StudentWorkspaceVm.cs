@@ -54,6 +54,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 vm.Initialize(StudentsVm.SelectedItem.Id);
                 await vm.ShowAsync();
+                await _initializedTask;
             }
         }
 

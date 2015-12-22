@@ -193,6 +193,9 @@ namespace HostelPortable.ViewModels.Students
             {
                 await _repository.UpdateStudentCardAsync(_studentId, Entity).WithBusyIndicator(this);
             }
+
+            SaveEntityState(Entity);
+            OnPropertyChanged(nameof(HasChanges));
         }
 
         private bool CanApply()

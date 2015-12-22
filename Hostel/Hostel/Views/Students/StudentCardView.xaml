@@ -85,8 +85,9 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Пол:" Style="{StaticResource EditorTextBlockStyle}" />
                 <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
                     <RadioButton Content="Мужской" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
-                                 IsChecked="{DataBinding IsMale, Mode=TwoWay, Validate=True}" />
+                                 IsChecked="{Binding IsMale, Mode=TwoWay}" />
                     <RadioButton Content="Женский" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
+                                 IsChecked="{DataBinding '!IsMale', Mode=TwoWay}"
                                  Margin="16 3 3 3" />
                 </StackPanel>
 
