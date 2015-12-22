@@ -7,5 +7,7 @@ namespace HostelPortable.Interfaces
     public interface IRepository
     {
         Task<IList<StudentProjection>> LoadStudentProjectionsAsync();
+
+        Task<StudentCardProjection> GetStudentCardProjectionAsync(int studentId);
     }
 }

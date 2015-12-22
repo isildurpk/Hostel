@@ -1,4 +1,7 @@
-﻿using MugenMvvmToolkit.ViewModels;
+﻿using System;
+using HostelPortable.Interfaces;
+using HostelPortable.Projections;
+using MugenMvvmToolkit.ViewModels;
 
 namespace HostelPortable.ViewModels.Students
 {
@@ -6,14 +9,17 @@ namespace HostelPortable.ViewModels.Students
     {
         #region Fields
 
+        private readonly IRepository _repository;
+
         private int _studentId;
 
         #endregion
 
         #region Constructors
 
-        public StudentCardVm()
+        public StudentCardVm(IRepository repository)
         {
+            _repository = repository;
             DisplayName = UiResources.StudentCardName;
         }
 
@@ -23,11 +29,13 @@ namespace HostelPortable.ViewModels.Students
 
         public bool IsNewRecord { get; private set; }
 
+        public StudentCardProjection Student { get; private set; }
+
         #endregion
 
         #region Methods
 
-        public void Initialize(int? studentId = null)
+        public async void Initialize(int? studentId = null)
         {
             if (studentId == null)
             {
@@ -36,6 +44,7 @@ namespace HostelPortable.ViewModels.Students
             }
 
             _studentId = studentId.Value;
+            Student = await _repository.GetStudentCardProjectionAsync(_studentId);
         }
 
         #endregion

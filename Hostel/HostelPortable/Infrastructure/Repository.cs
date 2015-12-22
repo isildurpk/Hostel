@@ -41,6 +41,25 @@ namespace HostelPortable.Infrastructure
             });
         }
 
-        #endregion
+        public Task<StudentCardProjection> GetStudentCardProjectionAsync(int studentId)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    conn.Open();
+                    return conn.Query<StudentCardProjection, PassportProjection, StudentCardProjection>("GetStudentCardProjection",
+                        (student, passport) =>
+                        {
+                            student.Passport = passport;
+                            return student;
+                        },
+                        new { studentId },
+                        commandType: CommandType.StoredProcedure).SingleOrDefault();
+                }
+            });
+        }
     }
+
+    #endregion
 }

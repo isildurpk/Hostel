@@ -15,7 +15,7 @@ namespace HostelPortable.Projections
 
         public string MiddleName { get; set; }
 
-        public int? IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
 
         public string IssuedBy { get; set; }
 
