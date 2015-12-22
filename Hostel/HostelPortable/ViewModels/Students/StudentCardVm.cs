@@ -52,7 +52,7 @@ namespace HostelPortable.ViewModels.Students
             }
         }
 
-        public bool? MedicalExamination
+        public bool MedicalExamination
         {
             get { return Entity.MedicalExamination; }
             set
@@ -87,10 +87,98 @@ namespace HostelPortable.ViewModels.Students
 
         public bool IsMale
         {
-            get { return Entity.Passport?.SexId == (int) Sex.Male; }
+            get { return Entity.SexId == (byte) Sex.Male; }
             set
             {
-                Entity.Passport.SexId = value ? (int) Sex.Male : (int) Sex.Female;
+                Entity.SexId = value ? (byte) Sex.Male : (byte) Sex.Female;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? BirthDate
+        {
+            get { return Entity.BirthDate; }
+            set
+            {
+                if (value.Equals(Entity.BirthDate)) return;
+                Entity.BirthDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FirstName
+        {
+            get { return Entity.FirstName; }
+            set
+            {
+                if (value.Equals(Entity.FirstName)) return;
+                Entity.FirstName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LastName
+        {
+            get { return Entity.LastName; }
+            set
+            {
+                if (value.Equals(Entity.LastName)) return;
+                Entity.LastName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MiddleName
+        {
+            get { return Entity.MiddleName; }
+            set
+            {
+                if (value.Equals(Entity.MiddleName)) return;
+                Entity.MiddleName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? IssueDate
+        {
+            get { return Entity.IssueDate; }
+            set
+            {
+                if (value.Equals(Entity.IssueDate)) return;
+                Entity.IssueDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string IssuedBy
+        {
+            get { return Entity.IssuedBy; }
+            set
+            {
+                if (value.Equals(Entity.IssuedBy)) return;
+                Entity.IssuedBy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int? Number
+        {
+            get { return Entity.Number; }
+            set
+            {
+                if (value == Entity.Number) return;
+                Entity.Number = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int? Series
+        {
+            get { return Entity.Series; }
+            set
+            {
+                if (value == Entity.Series) return;
+                Entity.Number = value;
                 OnPropertyChanged();
             }
         }
@@ -130,7 +218,7 @@ namespace HostelPortable.ViewModels.Students
         {
             if (studentId == null)
             {
-                InitializeEntity(new StudentCardProjection { Passport = new PassportProjection(Guid.NewGuid()) }, true);
+                InitializeEntity(new StudentCardProjection(), true);
                 return;
             }
 

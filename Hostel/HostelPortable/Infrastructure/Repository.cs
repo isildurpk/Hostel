@@ -49,14 +49,7 @@ namespace HostelPortable.Infrastructure
                 using (var conn = _getConnection())
                 {
                     conn.Open();
-                    return conn.Query<StudentCardProjection, PassportProjection, StudentCardProjection>("GetStudentCardProjection",
-                        (student, passport) =>
-                        {
-                            student.Passport = passport;
-                            return student;
-                        },
-                        new { studentId },
-                        commandType: CommandType.StoredProcedure).SingleOrDefault();
+                    return conn.Query<StudentCardProjection>("GetStudentCardProjection", new { studentId }, commandType: CommandType.StoredProcedure).SingleOrDefault();
                 }
             });
         }
@@ -64,7 +57,6 @@ namespace HostelPortable.Infrastructure
         public Task UpdateStudentCardAsync(int studentId, StudentCardProjection projection)
         {
             Should.NotBeNull(projection, nameof(projection));
-            Should.NotBeNull(projection.Passport, nameof(projection.Passport));
 
             return Task.Factory.StartNew(() =>
             {
@@ -79,15 +71,15 @@ namespace HostelPortable.Infrastructure
                             projection.Phone,
                             projection.NumberOfAuto,
                             projection.Comment,
-                            projection.Passport.LastName,
-                            projection.Passport.FirstName,
-                            projection.Passport.MiddleName,
-                            projection.Passport.BirthDate,
-                            projection.Passport.SexId,
-                            projection.Passport.Series,
-                            projection.Passport.Number,
-                            projection.Passport.IssueDate,
-                            projection.Passport.IssuedBy
+                            projection.LastName,
+                            projection.FirstName,
+                            projection.MiddleName,
+                            projection.BirthDate,
+                            projection.SexId,
+                            projection.Series,
+                            projection.Number,
+                            projection.IssueDate,
+                            projection.IssuedBy
                         },
                         commandType: CommandType.StoredProcedure);
                 }
