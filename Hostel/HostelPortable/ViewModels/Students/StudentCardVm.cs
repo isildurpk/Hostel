@@ -178,7 +178,7 @@ namespace HostelPortable.ViewModels.Students
             set
             {
                 if (value == Entity.Series) return;
-                Entity.Number = value;
+                Entity.Series = value;
                 OnPropertyChanged();
             }
         }
@@ -191,7 +191,11 @@ namespace HostelPortable.ViewModels.Students
         {
             if (!IsNewRecord)
             {
-                await _repository.UpdateStudentCardAsync(_studentId, Entity).WithBusyIndicator(this);
+                await _repository.UpdateStudentCardAsync(Entity).WithBusyIndicator(this);
+            }
+            else
+            {
+                
             }
 
             SaveEntityState(Entity);

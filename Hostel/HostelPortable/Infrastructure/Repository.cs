@@ -54,7 +54,7 @@ namespace HostelPortable.Infrastructure
             });
         }
 
-        public Task UpdateStudentCardAsync(int studentId, StudentCardProjection projection)
+        public Task UpdateStudentCardAsync(StudentCardProjection projection)
         {
             Should.NotBeNull(projection, nameof(projection));
 
@@ -66,11 +66,12 @@ namespace HostelPortable.Infrastructure
                     conn.Execute("UpdateStudentCard",
                         new
                         {
-                            studentId,
+                            projection.Id,
                             projection.MedicalExamination,
                             projection.Phone,
                             projection.NumberOfAuto,
                             projection.Comment,
+                            projection.PassportId,
                             projection.LastName,
                             projection.FirstName,
                             projection.MiddleName,
@@ -84,6 +85,11 @@ namespace HostelPortable.Infrastructure
                         commandType: CommandType.StoredProcedure);
                 }
             });
+        }
+
+        public Task<int> AddStudentAsync(StudentCardProjection projection)
+        {
+            throw new NotImplementedException();
         }
     }
 
