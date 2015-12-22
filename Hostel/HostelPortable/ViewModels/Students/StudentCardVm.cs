@@ -189,13 +189,15 @@ namespace HostelPortable.ViewModels.Students
 
         private async Task ApplyAsync()
         {
-            if (!IsNewRecord)
+            if (IsNewRecord)
             {
-                await _repository.UpdateStudentCardAsync(Entity).WithBusyIndicator(this);
+                await _repository.AddStudentAsync(Entity).WithBusyIndicator(this);
+                IsNewRecord = false;
+                OnPropertyChanged(nameof(IsNewRecord));
             }
             else
             {
-                
+                await _repository.UpdateStudentCardAsync(Entity).WithBusyIndicator(this);
             }
 
             SaveEntityState(Entity);
