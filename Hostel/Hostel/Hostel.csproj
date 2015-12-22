@@ -150,11 +150,13 @@
     <Resource Include="Resources\Img\24\edit.png" />
     <Resource Include="Resources\Img\24\left arrow.png" />
     <Resource Include="Resources\Img\24\office.png" />
-    <Resource Include="Resources\Img\24\cancel.png" />
     <Resource Include="Resources\Img\24\stack.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Img\24\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Img\24\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

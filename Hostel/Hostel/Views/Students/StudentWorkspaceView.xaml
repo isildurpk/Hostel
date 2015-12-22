@@ -20,6 +20,11 @@
             <ToolBar OverflowMode="Never">
                 <StackPanel Orientation="Horizontal">
 
+                    <Button Command="{Binding AddCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            ToolTip="Добавить">
+                        <Image Source="/Hostel;component/Resources/Img/24/add.png" />
+                    </Button>
+                    
                     <Button Command="{Binding EditCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
                             ToolTip="Редактировать">
                         <Image Source="/Hostel;component/Resources/Img/24/edit.png" />

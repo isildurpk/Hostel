@@ -85,12 +85,12 @@ namespace HostelPortable.ViewModels.Students
             }
         }
 
-        public bool IsMale
+        public bool IsFemale
         {
-            get { return Entity.SexId == (byte) Sex.Male; }
+            get { return Entity.SexId == (byte) Sex.Female; }
             set
             {
-                Entity.SexId = value ? (byte) Sex.Male : (byte) Sex.Female;
+                Entity.SexId = value ? (byte) Sex.Female : (byte) Sex.Male;
                 OnPropertyChanged();
             }
         }
@@ -191,6 +191,7 @@ namespace HostelPortable.ViewModels.Students
         {
             if (IsNewRecord)
             {
+                Entity.PassportId = Guid.NewGuid();
                 await _repository.AddStudentAsync(Entity).WithBusyIndicator(this);
                 IsNewRecord = false;
                 OnPropertyChanged(nameof(IsNewRecord));

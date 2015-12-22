@@ -96,20 +96,20 @@ namespace HostelPortable.Infrastructure
                 using (var conn = _getConnection())
                 {
                     var p = new DynamicParameters();
-                    p.Add(nameof(projection.MedicalExamination), projection.MedicalExamination);
-                    p.Add(projection.Phone);
-                    p.Add(projection.NumberOfAuto);
-                    p.Add(projection.Comment);
-                    p.Add(nameof(projection.PassportId), projection.PassportId);
-                    p.Add(projection.LastName);
-                    p.Add(projection.FirstName);
-                    p.Add(projection.MiddleName);
-                    p.Add(nameof(projection.BirthDate), projection.BirthDate);
-                    p.Add(nameof(projection.SexId), projection.SexId);
-                    p.Add(nameof(projection.Series), projection.Series);
-                    p.Add(nameof(projection.Number), projection.Number);
-                    p.Add(nameof(projection.IssueDate), projection.IssueDate);
-                    p.Add(projection.IssuedBy);
+                    p.Add("@MedicalExamination", projection.MedicalExamination);
+                    p.Add("@Phone", projection.Phone);
+                    p.Add("@NumberOfAuto", projection.NumberOfAuto);
+                    p.Add("@Comment", projection.Comment);
+                    p.Add("@PassportId", projection.PassportId);
+                    p.Add("@LastName", projection.LastName);
+                    p.Add("@FirstName", projection.FirstName);
+                    p.Add("@MiddleName", projection.MiddleName);
+                    p.Add("@BirthDate", projection.BirthDate);
+                    p.Add("@SexId", projection.SexId);
+                    p.Add("@Series", projection.Series);
+                    p.Add("@Number", projection.Number);
+                    p.Add("@IssueDate", projection.IssueDate);
+                    p.Add("@IssuedBy", projection.IssuedBy);
 
                     p.Add("@identity", direction:ParameterDirection.ReturnValue);
 
