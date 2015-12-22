@@ -5,6 +5,19 @@ namespace HostelPortable.Projections
 {
     public class PassportProjection : NotifyPropertyChangedBase
     {
+        #region Constructors
+
+        public PassportProjection()
+        {
+        }
+
+        public PassportProjection(Guid id)
+        {
+            Id = id;
+        }
+
+        #endregion
+
         public Guid Id { get; set; }
 
         public DateTime? BirthDate { get; set; }

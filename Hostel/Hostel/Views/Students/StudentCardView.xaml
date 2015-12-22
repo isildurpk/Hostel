@@ -67,24 +67,24 @@
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Фамилия:" Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.Passport.LastName, Mode=TwoWay}" />
+                     Text="{DataBinding Entity.Passport.LastName, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Имя:" Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.Passport.FirstName, Mode=TwoWay}" />
+                     Text="{DataBinding Entity.Passport.FirstName, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Отчество:" Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.Passport.MiddleName, Mode=TwoWay}" />
+                     Text="{DataBinding Entity.Passport.MiddleName, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата рождения:" Style="{StaticResource EditorTextBlockStyle}" />
                 <DatePicker Grid.Row="4" Grid.Column="1" Style="{StaticResource EditorDatePickerStyle}"
-                        SelectedDate="{DataBinding Student.Passport.BirthDate, Mode=TwoWay}" />
+                        SelectedDate="{DataBinding Entity.Passport.BirthDate, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Пол:" Style="{StaticResource EditorTextBlockStyle}" />
                 <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
                     <RadioButton Content="Мужской" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
-                             IsChecked="{DataBinding IsMale, Mode=TwoWay}" />
+                             IsChecked="{DataBinding IsMale, Mode=TwoWay, Validate=True}" />
                     <RadioButton Content="Женский" Style="{StaticResource EditorRadioButtonStyle}" GroupName="Sex"
                              Margin="16 3 3 3" />
                 </StackPanel>
@@ -99,21 +99,21 @@
 
                     <TextBlock Grid.Column="0" Text="Серия:" Style="{StaticResource EditorTextBlockStyle}" />
                     <TextBox Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                         Text="{DataBinding Student.Passport.Series, Mode=TwoWay}" />
+                         Text="{DataBinding Entity.Passport.Series, Mode=TwoWay, Validate=True}" />
 
                     <TextBlock Grid.Column="2" Text="Номер:" Style="{StaticResource EditorTextBlockStyle}" />
                     <TextBox Grid.Column="3" Style="{StaticResource EditorTextBoxStyle}"
-                         Text="{DataBinding Student.Passport.Number, Mode=TwoWay}" />
+                         Text="{DataBinding Entity.Passport.Number, Mode=TwoWay, Validate=True}" />
                 </Grid>
 
 
                 <TextBlock Grid.Row="2" Grid.Column="3" Text="Когда выдан:" Style="{StaticResource EditorTextBlockStyle}" />
                 <DatePicker Grid.Row="2" Grid.Column="4" Style="{StaticResource EditorDatePickerStyle}"
-                        SelectedDate="{DataBinding Student.Passport.IssueDate, Mode=TwoWay}" />
+                        SelectedDate="{DataBinding Entity.Passport.IssueDate, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="3" Grid.Column="3" Text="Кем выдан:" Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="3" Grid.Column="4" Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.Passport.IssuedBy, Mode=TwoWay}" />
+                     Text="{DataBinding Entity.Passport.IssuedBy, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Данные студента" Margin="3 16 3 3"
                        Style="{StaticResource CaptionTextBlockStyle}" />
@@ -130,18 +130,18 @@
                 <TextBlock Grid.Row="8" Grid.Column="0" Text="Номер телефона:"
                        Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="8" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.Phone, Mode=TwoWay}" />
+                     Text="{DataBinding Phone, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="9" Grid.Column="0" Text="Номер автомобиля:"
                        Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="9" Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.NumberOfAuto, Mode=TwoWay}" />
+                     Text="{DataBinding NumberOfAuto, Mode=TwoWay, Validate=True}" />
 
                 <TextBlock Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Text="Комментарий:"
                        Style="{StaticResource EditorTextBlockStyle}" />
                 <TextBox Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
                      Style="{StaticResource EditorTextBoxStyle}"
-                     Text="{DataBinding Student.Comment, Mode=TwoWay}" />
+                     Text="{DataBinding Comment, Mode=TwoWay, Validate=True}" />
             </Grid>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="0 16 0 0"

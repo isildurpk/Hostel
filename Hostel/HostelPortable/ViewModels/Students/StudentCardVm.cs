@@ -1,19 +1,19 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using HostelPortable.Interfaces;
 using HostelPortable.Projections;
-using MugenMvvmToolkit.Collections;
+using MugenMvvmToolkit.Interfaces.Models;
 using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
 
 namespace HostelPortable.ViewModels.Students
 {
-    public sealed class StudentCardVm : WorkspaceViewModel
+    public class StudentCardVm : EditableViewModel<StudentCardProjection>, IHasDisplayName
     {
         #region Fields
 
         private readonly IRepository _repository;
-        //private readonly TrackingCollection _trackingCollection = new TrackingCollection();
 
         private int _studentId;
 
@@ -25,9 +25,8 @@ namespace HostelPortable.ViewModels.Students
         {
             _repository = repository;
 
-            DisplayName = UiResources.StudentCardName;
-
             ApplyCommand = RelayCommandBase.FromAsyncHandler(ApplyAsync, CanApply, this);
+            CancelCommand = new RelayCommand(Cancel, CanCancel, this);
         }
 
         #endregion
@@ -42,15 +41,59 @@ namespace HostelPortable.ViewModels.Students
 
         #region Properties
 
-        public bool IsMale
+        public string Comment
         {
-            get { return Student?.Passport?.SexId == (int) Sex.Male; }
-            set { Student.Passport.SexId = value ? (int) Sex.Male : (int) Sex.Female; }
+            get { return Entity.Comment; }
+            set
+            {
+                if (value.Equals(Entity.Comment)) return;
+                Entity.Comment = value;
+                OnPropertyChanged();
+            }
         }
 
-        public bool IsNewRecord { get; private set; }
+        public bool? MedicalExamination
+        {
+            get { return Entity.MedicalExamination; }
+            set
+            {
+                if (value == Entity.MedicalExamination) return;
+                Entity.MedicalExamination = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public StudentCardProjection Student { get; private set; }
+        public string NumberOfAuto
+        {
+            get { return Entity.NumberOfAuto; }
+            set
+            {
+                if (value.Equals(Entity.NumberOfAuto)) return;
+                Entity.NumberOfAuto = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Phone
+        {
+            get { return Entity.Phone; }
+            set
+            {
+                if (value.Equals(Entity.Phone)) return;
+                Entity.Phone = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsMale
+        {
+            get { return Entity.Passport?.SexId == (int) Sex.Male; }
+            set
+            {
+                Entity.Passport.SexId = value ? (int) Sex.Male : (int) Sex.Female;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -58,21 +101,25 @@ namespace HostelPortable.ViewModels.Students
 
         private async Task ApplyAsync()
         {
-            await _repository.UpdateStudentCardAsync(_studentId, Student).WithBusyIndicator(this);
+            if (!IsNewRecord)
+            {
+                await _repository.UpdateStudentCardAsync(_studentId, Entity).WithBusyIndicator(this);
+            }
         }
 
         private bool CanApply()
         {
-            return true;
+            return HasChanges && IsValid;
         }
 
         private void Cancel()
         {
+            CancelChanges();
         }
 
         private bool CanCancel()
         {
-            return false;
+            return HasChanges;
         }
 
         #endregion
@@ -83,15 +130,19 @@ namespace HostelPortable.ViewModels.Students
         {
             if (studentId == null)
             {
-                IsNewRecord = true;
+                InitializeEntity(new StudentCardProjection { Passport = new PassportProjection(Guid.NewGuid()) }, true);
                 return;
             }
 
             _studentId = studentId.Value;
-            Student = await _repository.GetStudentCardProjectionAsync(_studentId);
-            OnPropertyChanged(nameof(Student));
-            OnPropertyChanged(nameof(IsMale));
+            InitializeEntity(await _repository.GetStudentCardProjectionAsync(_studentId).WithBusyIndicator(this), false);
         }
+
+        #endregion
+
+        #region Implements of IHasDisplayName
+
+        public string DisplayName { get; set; } = UiResources.StudentCardName;
 
         #endregion
     }
