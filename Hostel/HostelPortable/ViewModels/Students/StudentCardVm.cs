@@ -1,5 +1,4 @@
-﻿using System;
-using HostelPortable.Interfaces;
+﻿using HostelPortable.Interfaces;
 using HostelPortable.Projections;
 using MugenMvvmToolkit.ViewModels;
 
@@ -27,6 +26,12 @@ namespace HostelPortable.ViewModels.Students
 
         #region Properties
 
+        public bool IsMale
+        {
+            get { return Student?.Passport?.SexId == (int) Sex.Male; }
+            set { Student.Passport.SexId = value ? (int) Sex.Male : (int) Sex.Female; }
+        }
+
         public bool IsNewRecord { get; private set; }
 
         public StudentCardProjection Student { get; private set; }
@@ -45,6 +50,8 @@ namespace HostelPortable.ViewModels.Students
 
             _studentId = studentId.Value;
             Student = await _repository.GetStudentCardProjectionAsync(_studentId);
+            OnPropertyChanged(nameof(Student));
+            OnPropertyChanged(nameof(IsMale));
         }
 
         #endregion

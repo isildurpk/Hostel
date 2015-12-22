@@ -4,7 +4,7 @@ namespace HostelPortable.Projections
 {
     public class StudentCardProjection : NotifyPropertyChangedBase
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string Comment { get; set; }
 

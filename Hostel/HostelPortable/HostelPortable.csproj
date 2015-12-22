@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="PortableModule.cs" />
