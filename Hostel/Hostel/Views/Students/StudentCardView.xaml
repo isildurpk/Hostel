@@ -175,7 +175,7 @@
                     </ToolBar>
                 </ToolBarTray>
 
-                <DataGrid MinHeight="150" Style="{StaticResource DefaultGridStyle}" DataContext="{Binding LivingListVm}"
+                <DataGrid MinHeight="150" Style="{StaticResource DefaultGridStyle}" DataContext="{DataBinding LivingListVm}"
                           MouseDoubleClick="{DataBinding '$rel(UserControl).DataContext.EditLivingCommand', ToggleEnabledState=False}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Комната" Binding="{Binding RoomNumber}" />

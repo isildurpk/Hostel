@@ -145,11 +145,27 @@ namespace HostelPortable.Infrastructure
             });
         }
 
-        public Task AddLivingAsync(LivingProjection projection)
+        public Task AddLivingAsync(LivingProjection projection, int studentId)
         {
             Should.NotBeNull(projection, nameof(projection));
 
-            return Task.Delay(1);
+            return Task.Factory.StartNew(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    var p = new
+                    {
+                        projection.ContractNumber,
+                        projection.RoomId,
+                        projection.DateFrom,
+                        projection.DateTo,
+                        StudentId = studentId
+                    };
+
+                    conn.Open();
+                    conn.Execute("AddLiving", p, commandType: CommandType.StoredProcedure);
+                }
+            });
         }
     }
 

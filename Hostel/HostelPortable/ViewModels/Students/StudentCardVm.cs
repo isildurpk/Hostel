@@ -18,7 +18,6 @@ namespace HostelPortable.ViewModels.Students
         private readonly IRepository _repository;
 
         private int _studentId;
-        private Task _loadLivingsTask;
 
         #endregion
 
@@ -222,7 +221,7 @@ namespace HostelPortable.ViewModels.Students
                 _studentId = Entity.Id;
                 IsNewRecord = false;
                 OnPropertyChanged(nameof(IsNewRecord));
-                await _loadLivingsTask;
+                LoadLivings();
             }
             else
             {
@@ -261,8 +260,8 @@ namespace HostelPortable.ViewModels.Students
                     return;
                 }
 
-                LivingListVm.ItemsSource.Add(projection);
-                LivingListVm.SelectedItem = projection;
+                await _repository.AddLivingAsync(projection, _studentId).WithBusyIndicator(this);
+                LoadLivings();
             }
         }
 
@@ -282,9 +281,8 @@ namespace HostelPortable.ViewModels.Students
                     return;
                 }
 
-                
 
-                await _loadLivingsTask;
+                LoadLivings();
             }
         }
 
@@ -308,9 +306,14 @@ namespace HostelPortable.ViewModels.Students
             _studentId = studentId.Value;
             InitializeEntity(await _repository.GetStudentCardProjectionAsync(_studentId).WithBusyIndicator(this), false);
 
-            _loadLivingsTask = _repository.LoadLivingProjectionsAsync(_studentId)
+            await _repository.LoadLivingProjectionsAsync(_studentId)
                 .TryExecuteSynchronously(task => LivingListVm.UpdateItemsSource(task.Result))
                 .WithBusyIndicator(this);
+        }
+
+        private async void LoadLivings()
+        {
+            LivingListVm.UpdateItemsSource(await _repository.LoadLivingProjectionsAsync(_studentId).WithBusyIndicator(this));
         }
 
         private void Validate()

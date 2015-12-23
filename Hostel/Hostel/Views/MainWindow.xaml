@@ -22,7 +22,7 @@
         </Menu>
 
         <TabControl Grid.Row="1" ItemsSource="{Binding ItemsSource}" Background="White"
-                    SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    SelectedItem="{DataBinding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnNotifyDataErrors=False}"
                     ItemTemplate="{StaticResource TabItemTemplate}"
                     ContentTemplate="{StaticResource TabContentTemplate}" />
     </Grid>

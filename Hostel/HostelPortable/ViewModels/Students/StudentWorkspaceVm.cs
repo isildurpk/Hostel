@@ -10,11 +10,9 @@ namespace HostelPortable.ViewModels.Students
 {
     public sealed class StudentWorkspaceVm : WorkspaceViewModel
     {
-        private readonly IRepository _repository;
-
         #region Fields
 
-        private Task _initializedTask;
+        private readonly IRepository _repository;
 
         #endregion
 
@@ -57,7 +55,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 vm.Initialize();
                 await vm.ShowAsync();
-                await _initializedTask;
+                await RefreshAsync();
             }
         }
 
@@ -72,7 +70,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 vm.Initialize(StudentsVm.SelectedItem.Id);
                 await vm.ShowAsync();
-                await _initializedTask;
+                await RefreshAsync();
             }
         }
 
@@ -83,7 +81,7 @@ namespace HostelPortable.ViewModels.Students
 
         private async Task RefreshAsync()
         {
-            await _initializedTask;
+            StudentsVm.UpdateItemsSource(await _repository.LoadStudentProjectionsAsync().WithBusyIndicator(this));
         }
 
         #endregion
@@ -96,7 +94,7 @@ namespace HostelPortable.ViewModels.Students
 
             StudentsVm = GetViewModel<GridViewModel<StudentProjection>>();
 
-            _initializedTask = _repository.LoadStudentProjectionsAsync().TryExecuteSynchronously(task => StudentsVm.UpdateItemsSource(task.Result))
+            _repository.LoadStudentProjectionsAsync().TryExecuteSynchronously(task => StudentsVm.UpdateItemsSource(task.Result))
                 .WithBusyIndicator(this);
         }
 
