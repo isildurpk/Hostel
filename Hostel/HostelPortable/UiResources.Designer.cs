@@ -115,6 +115,15 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пересечение с уже существующим периодом.
+        /// </summary>
+        internal static string ErrorPeriodIntersects {
+            get {
+                return ResourceManager.GetString("ErrorPeriodIntersects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поле не должно быть пустым.
         /// </summary>
         internal static string ErrorRequired {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -254,7 +255,9 @@ namespace HostelPortable.ViewModels.Students
             using (var wrapper = vm.Wrap<IEditorWrapperVm>())
             {
                 var projection = new LivingProjection();
+                vm.Initialize(LivingListVm.ItemsSource);
                 vm.InitializeEntity(projection, true);
+
                 if (!await wrapper.ShowAsync())
                 {
                     return;
@@ -275,7 +278,9 @@ namespace HostelPortable.ViewModels.Students
             using (var vm = GetViewModel<StudentLivingEditorVm>())
             using (var wrapper = vm.Wrap<IEditorWrapperVm>())
             {
+                vm.Initialize(LivingListVm.ItemsSource.Where(x => x != LivingListVm.SelectedItem));
                 vm.InitializeEntity(LivingListVm.SelectedItem, false);
+
                 if (!await wrapper.ShowAsync())
                 {
                     return;

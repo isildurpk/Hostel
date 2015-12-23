@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HostelPortable.Interfaces;
 using HostelPortable.Projections;
+using HostelPortable.Utils;
 using MugenMvvmToolkit;
 using MugenMvvmToolkit.ViewModels;
 
@@ -13,7 +14,9 @@ namespace HostelPortable.ViewModels.Students
         #region Fields
 
         private readonly IRepository _repository;
+
         private RoomProjection _selectedRoom;
+        private IList<LivingProjection> _allLivings;
 
         #endregion
 
@@ -99,6 +102,11 @@ namespace HostelPortable.ViewModels.Students
 
         #region Methods
 
+        public void Initialize(IEnumerable<LivingProjection> existingProjections)
+        {
+            _allLivings = new List<LivingProjection>(existingProjections);
+        }
+
         private void Validate()
         {
             Validator.ClearErrors();
@@ -120,6 +128,15 @@ namespace HostelPortable.ViewModels.Students
             {
                 Validator.SetErrors(nameof(DateFrom), UiResources.ErrorDateRange);
                 Validator.SetErrors(nameof(DateTo), UiResources.ErrorDateRange);
+            }
+            else if (_allLivings != null)
+            {
+                var range = new DateTimeRange(DateFrom, DateTo);
+                if (_allLivings.Any(projection => range.Intersects(projection.DateFrom, projection.DateTo)))
+                {
+                    Validator.SetErrors(nameof(DateFrom), UiResources.ErrorPeriodIntersects);
+                    Validator.SetErrors(nameof(DateTo), UiResources.ErrorPeriodIntersects);
+                }
             }
 
             if (SelectedRoom == null)

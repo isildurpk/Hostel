@@ -135,6 +135,9 @@
   <data name="ErrorNegative" xml:space="preserve">
     <value>Значение не может быть отрицательным</value>
   </data>
+  <data name="ErrorPeriodIntersects" xml:space="preserve">
+    <value>Пересечение с уже существующим периодом</value>
+  </data>
   <data name="ErrorRequired" xml:space="preserve">
     <value>Поле не должно быть пустым</value>
   </data>
