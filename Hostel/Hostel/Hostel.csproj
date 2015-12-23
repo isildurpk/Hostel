@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IocModule.cs" />
+    <Compile Include="Views\EditorWrapperView.xaml.cs">
+      <DependentUpon>EditorWrapperView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
     <Compile Include="Views\Students\StudentWorkspaceView.xaml.cs">
       <DependentUpon>StudentWorkspaceView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\EditorWrapperView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -52,6 +52,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
+    <Compile Include="Interfaces\IEditorWrapperVm.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="PortableModule.cs" />
     <Compile Include="Projections\LivingProjection.cs" />
@@ -64,9 +65,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UiResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EditorWrapperVm.cs" />
     <Compile Include="ViewModels\MainVm.cs" />
     <Compile Include="ViewModels\Students\StudentCardVm.cs" />
     <Compile Include="ViewModels\Students\StudentWorkspaceVm.cs" />
+    <Compile Include="ViewModelWrapperRegistrationModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
