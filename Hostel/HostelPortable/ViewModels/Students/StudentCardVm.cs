@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HostelPortable.Interfaces;
 using HostelPortable.Projections;
+using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces.Models;
 using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
@@ -247,6 +248,15 @@ namespace HostelPortable.ViewModels.Students
 
         private async Task AddLivingAsync()
         {
+            using (var vm = GetViewModel<StudentLivingEditorVm>())
+            using (var wrapper = vm.Wrap<IEditorWrapperVm>())
+            {
+                vm.InitializeEntity(new LivingProjection(), true);
+                if (!await wrapper.ShowAsync())
+                {
+                    return;
+                }
+            }
         }
 
         private bool CanAddLiving()
@@ -270,7 +280,7 @@ namespace HostelPortable.ViewModels.Students
             InitializeEntity(await _repository.GetStudentCardProjectionAsync(_studentId).WithBusyIndicator(this), false);
 
             _loadLivingsTask = _repository.LoadLivingProjectionsAsync(_studentId)
-                .ContinueWith(task => LivingListVm.UpdateItemsSource(task.Result))
+                .TryExecuteSynchronously(task => LivingListVm.UpdateItemsSource(task.Result))
                 .WithBusyIndicator(this);
         }
 

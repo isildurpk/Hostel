@@ -70,6 +70,15 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Редактирование записи.
+        /// </summary>
+        internal static string EditorName {
+            get {
+                return ResourceManager.GetString("EditorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата не может быть больше текущей.
         /// </summary>
         internal static string ErrorDateMoreThanNow {

@@ -132,6 +132,18 @@ namespace HostelPortable.Infrastructure
                 }
             });
         }
+
+        public Task<IList<RoomProjection>> LoadRoomsWithFreeSeatsAsync(int hostelId)
+        {
+            return Task.Factory.StartNew<IList<RoomProjection>>(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    conn.Open();
+                    return conn.Query<RoomProjection>("LoadRoomsWithFreeSeats", new { hostelId }, commandType: CommandType.StoredProcedure).ToList();
+                }
+            });
+        }
     }
 
     #endregion

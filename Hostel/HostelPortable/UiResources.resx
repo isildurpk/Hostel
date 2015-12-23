@@ -120,6 +120,9 @@
   <data name="DefaultBusyMessage" xml:space="preserve">
     <value>Загрузка...</value>
   </data>
+  <data name="EditorName" xml:space="preserve">
+    <value>Редактирование записи</value>
+  </data>
   <data name="ErrorDateMoreThanNow" xml:space="preserve">
     <value>Дата не может быть больше текущей</value>
   </data>

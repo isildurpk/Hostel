@@ -57,6 +57,7 @@
     <Compile Include="PortableModule.cs" />
     <Compile Include="Projections\LivingProjection.cs" />
     <Compile Include="Projections\PassportProjection.cs" />
+    <Compile Include="Projections\RoomProjection.cs" />
     <Compile Include="Projections\StudentCardProjection.cs" />
     <Compile Include="Projections\StudentProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ViewModels\EditorWrapperVm.cs" />
     <Compile Include="ViewModels\MainVm.cs" />
     <Compile Include="ViewModels\Students\StudentCardVm.cs" />
+    <Compile Include="ViewModels\Students\StudentLivingEditorVm.cs" />
     <Compile Include="ViewModels\Students\StudentWorkspaceVm.cs" />
     <Compile Include="ViewModelWrapperRegistrationModule.cs" />
   </ItemGroup>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="Hostel.Views.Students.StudentLivingEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:students="clr-namespace:HostelPortable.ViewModels.Students;assembly=HostelPortable"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance students:StudentLivingEditorVm}"
+             d:DesignHeight="150" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Комната:" Style="{StaticResource EditorTextBlockStyle}" />
+        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource EditorComboBoxStyle}"
+                  ItemsSource="{Binding RoomList}"
+                  SelectedItem="{DataBinding SelectedRoom, Mode=TwoWay, Validate=True}"
+                  DisplayMemberPath="Display" SelectedValuePath="Id" />
+
+    </Grid>
+</UserControl>

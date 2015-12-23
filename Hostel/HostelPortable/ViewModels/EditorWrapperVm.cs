@@ -7,7 +7,7 @@ using MugenMvvmToolkit.ViewModels;
 
 namespace HostelPortable.ViewModels
 {
-    public class EditorWrapperVm<T> : WrapperViewModelBase<T>, IEditorWrapperVm
+    public sealed class EditorWrapperVm<T> : WrapperViewModelBase<T>, IEditorWrapperVm
         where T : class, IEditableViewModel
     {
         #region Fields
@@ -21,6 +21,8 @@ namespace HostelPortable.ViewModels
         public EditorWrapperVm()
         {
             ApplyCommand = RelayCommandBase.FromAsyncHandler<object>(Apply, CanApply, false, this);
+
+            DisplayName = UiResources.EditorName;
         }
 
         #endregion
