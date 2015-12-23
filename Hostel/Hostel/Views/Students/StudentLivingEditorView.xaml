@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:students="clr-namespace:HostelPortable.ViewModels.Students;assembly=HostelPortable"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance students:StudentLivingEditorVm}"
-             d:DesignHeight="150" Width="400">
+             d:DesignHeight="60" Width="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -24,5 +24,12 @@
                   SelectedItem="{DataBinding SelectedRoom, Mode=TwoWay, Validate=True}"
                   DisplayMemberPath="Display" SelectedValuePath="Id" />
 
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Заселение:" Style="{StaticResource EditorTextBlockStyle}" />
+        <DatePicker Grid.Row="1" Grid.Column="1" Style="{StaticResource EditorDatePickerStyle}"
+                    SelectedDate="{DataBinding DateFrom, Mode=TwoWay, Validate=True}" />
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Выселение:" Style="{StaticResource EditorTextBlockStyle}" />
+        <DatePicker Grid.Row="1" Grid.Column="3" Style="{StaticResource EditorDatePickerStyle}"
+                    SelectedDate="{DataBinding DateTo, Mode=TwoWay, Validate=True}"/>
     </Grid>
 </UserControl>

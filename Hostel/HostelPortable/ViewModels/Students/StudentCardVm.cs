@@ -251,11 +251,14 @@ namespace HostelPortable.ViewModels.Students
             using (var vm = GetViewModel<StudentLivingEditorVm>())
             using (var wrapper = vm.Wrap<IEditorWrapperVm>())
             {
-                vm.InitializeEntity(new LivingProjection(), true);
+                var projection = new LivingProjection();
+                vm.InitializeEntity(projection, true);
                 if (!await wrapper.ShowAsync())
                 {
                     return;
                 }
+
+
             }
         }
 

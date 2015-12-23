@@ -126,6 +126,9 @@
   <data name="ErrorDateMoreThanNow" xml:space="preserve">
     <value>Дата не может быть больше текущей</value>
   </data>
+  <data name="ErrorDateRange" xml:space="preserve">
+    <value>Дата окончания не может быть меньше даты начала</value>
+  </data>
   <data name="ErrorMaxLengthFormat" xml:space="preserve">
     <value>Длина поля не должна быть больше {0}</value>
   </data>

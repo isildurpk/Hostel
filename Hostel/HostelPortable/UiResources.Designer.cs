@@ -88,6 +88,15 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата окончания не может быть меньше даты начала.
+        /// </summary>
+        internal static string ErrorDateRange {
+            get {
+                return ResourceManager.GetString("ErrorDateRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Длина поля не должна быть больше {0}.
         /// </summary>
         internal static string ErrorMaxLengthFormat {
