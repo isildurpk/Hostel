@@ -132,6 +132,9 @@
   <data name="ErrorMaxLengthFormat" xml:space="preserve">
     <value>Длина поля не должна быть больше {0}</value>
   </data>
+  <data name="ErrorNegative" xml:space="preserve">
+    <value>Значение не может быть отрицательным</value>
+  </data>
   <data name="ErrorRequired" xml:space="preserve">
     <value>Поле не должно быть пустым</value>
   </data>

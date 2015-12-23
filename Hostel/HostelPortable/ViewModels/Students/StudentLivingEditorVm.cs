@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HostelPortable.Interfaces;
 using HostelPortable.Projections;
 using MugenMvvmToolkit;
@@ -26,6 +27,18 @@ namespace HostelPortable.ViewModels.Students
         #endregion
 
         #region Properties
+
+        public int? ContractNumber
+        {
+            get { return Entity.ContractNumber.ToNulllable(); }
+            set
+            {
+                if (value == Entity.ContractNumber) return;
+                Entity.ContractNumber = value.GetValueOrDefault();
+                Validate();
+                OnPropertyChanged();
+            }
+        }
 
         public DateTime? DateFrom
         {
@@ -59,7 +72,7 @@ namespace HostelPortable.ViewModels.Students
             set
             {
                 _selectedRoom = value;
-                Entity.RoomId = value.Id;
+                Entity.RoomId = (value?.Id).GetValueOrDefault();
                 Validate();
                 OnPropertyChanged();
             }
@@ -69,16 +82,15 @@ namespace HostelPortable.ViewModels.Students
 
         #region Overrides of EditableViewModel
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            _repository.LoadRoomsWithFreeSeatsAsync(0).TryExecuteSynchronously(task => RoomList = task.Result).WithBusyIndicator(this);
-        }
-
         protected override void OnEntityInitialized()
         {
             base.OnEntityInitialized();
+
+            _repository.LoadRoomsWithFreeSeatsAsync(0).TryExecuteSynchronously(task =>
+            {
+                RoomList = task.Result;
+                SelectedRoom = RoomList.SingleOrDefault(r => r.Id == Entity.RoomId);
+            }).WithBusyIndicator(this);
 
             Validate();
         }
@@ -90,6 +102,15 @@ namespace HostelPortable.ViewModels.Students
         private void Validate()
         {
             Validator.ClearErrors();
+
+            if (ContractNumber == null)
+            {
+                Validator.SetErrors(nameof(ContractNumber), UiResources.ErrorRequired);
+            }
+            else if (ContractNumber < 0)
+            {
+                Validator.SetErrors(nameof(ContractNumber), UiResources.ErrorNegative);
+            }
 
             if (DateFrom == null)
             {

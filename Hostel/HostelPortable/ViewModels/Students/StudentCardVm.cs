@@ -31,6 +31,7 @@ namespace HostelPortable.ViewModels.Students
             ApplyCommand = RelayCommandBase.FromAsyncHandler(ApplyAsync, CanApply, this);
             CancelCommand = new RelayCommand(Cancel, CanCancel, this);
             AddLivingCommand = RelayCommandBase.FromAsyncHandler(AddLivingAsync, CanAddLiving, this);
+            EditLivingCommand = RelayCommandBase.FromAsyncHandler(EditLivingAsync, CanEditLiving, this);
         }
 
         #endregion
@@ -42,6 +43,8 @@ namespace HostelPortable.ViewModels.Students
         public ICommand CancelCommand { get; private set; }
 
         public ICommand AddLivingCommand { get; private set; }
+
+        public ICommand EditLivingCommand { get; private set; }
 
         #endregion
 
@@ -258,13 +261,36 @@ namespace HostelPortable.ViewModels.Students
                     return;
                 }
 
-
+                LivingListVm.ItemsSource.Add(projection);
+                LivingListVm.SelectedItem = projection;
             }
         }
 
         private bool CanAddLiving()
         {
             return LivingListVm != null;
+        }
+
+        private async Task EditLivingAsync()
+        {
+            using (var vm = GetViewModel<StudentLivingEditorVm>())
+            using (var wrapper = vm.Wrap<IEditorWrapperVm>())
+            {
+                vm.InitializeEntity(LivingListVm.SelectedItem, false);
+                if (!await wrapper.ShowAsync())
+                {
+                    return;
+                }
+
+                
+
+                await _loadLivingsTask;
+            }
+        }
+
+        private bool CanEditLiving()
+        {
+            return LivingListVm?.SelectedItem != null;
         }
 
         #endregion

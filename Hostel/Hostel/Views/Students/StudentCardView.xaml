@@ -166,16 +166,17 @@
                                 <Image Source="/Hostel;component/Resources/Img/16/add.png" />
                             </Button>
 
-                            <!--<Button Command="{Binding EditLivingCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                            <Button Command="{Binding EditLivingCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
                                     ToolTip="Редактировать">
                                 <Image Source="/Hostel;component/Resources/Img/16/edit.png" />
-                            </Button>-->
+                            </Button>
 
                         </StackPanel>
                     </ToolBar>
                 </ToolBarTray>
 
-                <DataGrid MinHeight="150" Style="{StaticResource DefaultGridStyle}" DataContext="{Binding LivingListVm}">
+                <DataGrid MinHeight="150" Style="{StaticResource DefaultGridStyle}" DataContext="{Binding LivingListVm}"
+                          MouseDoubleClick="{DataBinding '$rel(UserControl).DataContext.EditLivingCommand', ToggleEnabledState=False}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Комната" Binding="{Binding RoomNumber}" />
                         <DataGridTextColumn Header="Дата заселения" Binding="{Binding DateFrom, StringFormat=dd.MM.yyyy}" />

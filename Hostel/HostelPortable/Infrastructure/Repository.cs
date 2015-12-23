@@ -144,6 +144,13 @@ namespace HostelPortable.Infrastructure
                 }
             });
         }
+
+        public Task AddLivingAsync(LivingProjection projection)
+        {
+            Should.NotBeNull(projection, nameof(projection));
+
+            return Task.Delay(1);
+        }
     }
 
     #endregion

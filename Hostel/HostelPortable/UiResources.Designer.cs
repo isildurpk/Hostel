@@ -106,6 +106,15 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Значение не может быть отрицательным.
+        /// </summary>
+        internal static string ErrorNegative {
+            get {
+                return ResourceManager.GetString("ErrorNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поле не должно быть пустым.
         /// </summary>
         internal static string ErrorRequired {

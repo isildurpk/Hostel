@@ -7,6 +7,8 @@ namespace HostelPortable.Projections
     {
         public int Id { get; set; }
 
+        public int ContractNumber { get; set; }
+
         public int RoomId { get; set; }
 
         public int RoomNumber { get; set; }

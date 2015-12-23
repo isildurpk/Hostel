@@ -40,7 +40,7 @@
         </ToolBarTray>
 
         <DataGrid Grid.Row="1" DataContext="{Binding StudentsVm}" Style="{StaticResource DefaultGridStyle}"
-                  MouseDoubleClick="{DataBinding '$root.DataContext.EditCommand', ToggleEnabledState=False}">
+                  MouseDoubleClick="{DataBinding '$rel(UserControl).DataContext.EditCommand', ToggleEnabledState=False}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding FullName}" Header="ФИО" />

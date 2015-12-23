@@ -17,5 +17,7 @@ namespace HostelPortable.Interfaces
         Task<IList<LivingProjection>> LoadLivingProjectionsAsync(int studentId);
 
         Task<IList<RoomProjection>> LoadRoomsWithFreeSeatsAsync(int hostelId);
+
+        Task AddLivingAsync(LivingProjection projection);
     }
 }
