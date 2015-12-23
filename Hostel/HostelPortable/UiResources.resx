@@ -120,14 +120,17 @@
   <data name="DefaultBusyMessage" xml:space="preserve">
     <value>Загрузка...</value>
   </data>
-  <data name="ErrorDateMoreThanNowMessage" xml:space="preserve">
+  <data name="ErrorDateMoreThanNow" xml:space="preserve">
     <value>Дата не может быть больше текущей</value>
   </data>
   <data name="ErrorMaxLengthFormat" xml:space="preserve">
-    <value>Длина строки не должна быть больше {0}</value>
+    <value>Длина поля не должна быть больше {0}</value>
   </data>
-  <data name="ErrorRequiredMessage" xml:space="preserve">
+  <data name="ErrorRequired" xml:space="preserve">
     <value>Поле не должно быть пустым</value>
+  </data>
+  <data name="ErrorUnavailableSymbols" xml:space="preserve">
+    <value>Недопустимые символы</value>
   </data>
   <data name="StudentCardName" xml:space="preserve">
     <value>Карточка студента</value>

@@ -72,14 +72,14 @@ namespace HostelPortable {
         /// <summary>
         ///   Looks up a localized string similar to Дата не может быть больше текущей.
         /// </summary>
-        internal static string ErrorDateMoreThanNowMessage {
+        internal static string ErrorDateMoreThanNow {
             get {
-                return ResourceManager.GetString("ErrorDateMoreThanNowMessage", resourceCulture);
+                return ResourceManager.GetString("ErrorDateMoreThanNow", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Длина строки не должна быть больше {0}.
+        ///   Looks up a localized string similar to Длина поля не должна быть больше {0}.
         /// </summary>
         internal static string ErrorMaxLengthFormat {
             get {
@@ -90,9 +90,18 @@ namespace HostelPortable {
         /// <summary>
         ///   Looks up a localized string similar to Поле не должно быть пустым.
         /// </summary>
-        internal static string ErrorRequiredMessage {
+        internal static string ErrorRequired {
             get {
-                return ResourceManager.GetString("ErrorRequiredMessage", resourceCulture);
+                return ResourceManager.GetString("ErrorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недопустимые символы.
+        /// </summary>
+        internal static string ErrorUnavailableSymbols {
+            get {
+                return ResourceManager.GetString("ErrorUnavailableSymbols", resourceCulture);
             }
         }
         

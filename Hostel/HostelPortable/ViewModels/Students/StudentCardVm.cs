@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HostelPortable.Interfaces;
@@ -256,7 +257,7 @@ namespace HostelPortable.ViewModels.Students
 
             if (string.IsNullOrEmpty(LastName))
             {
-                Validator.SetErrors(nameof(LastName), UiResources.ErrorRequiredMessage);
+                Validator.SetErrors(nameof(LastName), UiResources.ErrorRequired);
             }
             else if (LastName.Length > 50)
             {
@@ -265,7 +266,7 @@ namespace HostelPortable.ViewModels.Students
 
             if (string.IsNullOrEmpty(FirstName))
             {
-                Validator.SetErrors(nameof(FirstName), UiResources.ErrorRequiredMessage);
+                Validator.SetErrors(nameof(FirstName), UiResources.ErrorRequired);
             }
             else if (FirstName.Length > 50)
             {
@@ -274,7 +275,7 @@ namespace HostelPortable.ViewModels.Students
 
             if (string.IsNullOrEmpty(MiddleName))
             {
-                Validator.SetErrors(nameof(MiddleName), UiResources.ErrorRequiredMessage);
+                Validator.SetErrors(nameof(MiddleName), UiResources.ErrorRequired);
             }
             else if (MiddleName.Length > 50)
             {
@@ -283,21 +284,43 @@ namespace HostelPortable.ViewModels.Students
 
             if (BirthDate == null)
             {
-                Validator.SetErrors(nameof(BirthDate), UiResources.ErrorRequiredMessage);
+                Validator.SetErrors(nameof(BirthDate), UiResources.ErrorRequired);
             }
             else if (BirthDate > DateTime.Now)
             {
-                Validator.SetErrors(nameof(BirthDate), UiResources.ErrorDateMoreThanNowMessage);
+                Validator.SetErrors(nameof(BirthDate), UiResources.ErrorDateMoreThanNow);
             }
 
-            if (Series != null && Series > 9999)
+            if (IssueDate > DateTime.Now)
             {
-                Validator.SetErrors(nameof(Series));
+                Validator.SetErrors(nameof(IssueDate), UiResources.ErrorDateMoreThanNow);
             }
 
-            if (Number != null && Number > 999999)
+            if (IssuedBy?.Length > 500)
             {
-                Validator.SetErrors(nameof(Number));
+                Validator.SetErrors(nameof(MiddleName), string.Format(UiResources.ErrorMaxLengthFormat, 50));
+            }
+
+            if (Phone != null)
+            {
+                if (!Regex.IsMatch(Phone, @"^\+?[\d,\(,\),-]+$"))
+                {
+                    Validator.SetErrors(nameof(Phone), UiResources.ErrorUnavailableSymbols);
+                }
+                else if (Phone.Length > 20)
+                {
+                    Validator.SetErrors(nameof(Phone), string.Format(UiResources.ErrorMaxLengthFormat, 20));
+                }
+            }
+
+            if (NumberOfAuto?.Length > 20)
+            {
+                Validator.SetErrors(nameof(NumberOfAuto), string.Format(UiResources.ErrorMaxLengthFormat, 20));
+            }
+
+            if (Comment?.Length > 500)
+            {
+                Validator.SetErrors(nameof(NumberOfAuto), string.Format(UiResources.ErrorMaxLengthFormat, 500));
             }
         }
 
