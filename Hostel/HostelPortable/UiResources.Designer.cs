@@ -70,6 +70,33 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата не может быть больше текущей.
+        /// </summary>
+        internal static string ErrorDateMoreThanNowMessage {
+            get {
+                return ResourceManager.GetString("ErrorDateMoreThanNowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Длина строки не должна быть больше {0}.
+        /// </summary>
+        internal static string ErrorMaxLengthFormat {
+            get {
+                return ResourceManager.GetString("ErrorMaxLengthFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поле не должно быть пустым.
+        /// </summary>
+        internal static string ErrorRequiredMessage {
+            get {
+                return ResourceManager.GetString("ErrorRequiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Карточка студента.
         /// </summary>
         internal static string StudentCardName {

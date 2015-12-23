@@ -101,11 +101,11 @@
 
                     <TextBlock Grid.Column="0" Text="Серия:" Style="{StaticResource EditorTextBlockStyle}" />
                     <TextBox Grid.Column="1" Style="{StaticResource EditorTextBoxStyle}"
-                             Text="{DataBinding Series, Mode=TwoWay, Validate=True}" />
+                             Text="{Binding Series, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True, StringFormat=0000, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBlock Grid.Column="2" Text="Номер:" Style="{StaticResource EditorTextBlockStyle}" />
                     <TextBox Grid.Column="3" Style="{StaticResource EditorTextBoxStyle}"
-                             Text="{DataBinding Number, Mode=TwoWay, Validate=True}" />
+                             Text="{Binding Number, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True, StringFormat=000000, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
 

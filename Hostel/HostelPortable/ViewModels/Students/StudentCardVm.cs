@@ -48,6 +48,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.Comment)) return;
                 Entity.Comment = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -59,6 +60,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value == Entity.MedicalExamination) return;
                 Entity.MedicalExamination = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -70,6 +72,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.NumberOfAuto)) return;
                 Entity.NumberOfAuto = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -81,6 +84,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.Phone)) return;
                 Entity.Phone = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -91,17 +95,19 @@ namespace HostelPortable.ViewModels.Students
             set
             {
                 Entity.SexId = value ? (byte) Sex.Female : (byte) Sex.Male;
+                Validate();
                 OnPropertyChanged();
             }
         }
 
         public DateTime? BirthDate
         {
-            get { return Entity.BirthDate; }
+            get { return Entity.BirthDate.ToNulllable(); }
             set
             {
-                if (value.Equals(Entity.BirthDate)) return;
-                Entity.BirthDate = value;
+                if (value == Entity.BirthDate) return;
+                Entity.BirthDate = value.GetValueOrDefault();
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -113,6 +119,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.FirstName)) return;
                 Entity.FirstName = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -124,6 +131,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.LastName)) return;
                 Entity.LastName = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -135,6 +143,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.MiddleName)) return;
                 Entity.MiddleName = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -144,8 +153,9 @@ namespace HostelPortable.ViewModels.Students
             get { return Entity.IssueDate; }
             set
             {
-                if (value.Equals(Entity.IssueDate)) return;
+                if (value == Entity.IssueDate) return;
                 Entity.IssueDate = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -157,6 +167,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value.Equals(Entity.IssuedBy)) return;
                 Entity.IssuedBy = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -168,6 +179,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value == Entity.Number) return;
                 Entity.Number = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -179,6 +191,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value == Entity.Series) return;
                 Entity.Series = value;
+                Validate();
                 OnPropertyChanged();
             }
         }
@@ -200,7 +213,7 @@ namespace HostelPortable.ViewModels.Students
             {
                 await _repository.UpdateStudentCardAsync(Entity).WithBusyIndicator(this);
             }
-            
+
             SaveEntityState(Entity);
             OnPropertyChanged(nameof(HasChanges));
         }
@@ -213,6 +226,7 @@ namespace HostelPortable.ViewModels.Students
         private void Cancel()
         {
             CancelChanges();
+            Validate();
         }
 
         private bool CanCancel()
@@ -236,11 +250,73 @@ namespace HostelPortable.ViewModels.Students
             InitializeEntity(await _repository.GetStudentCardProjectionAsync(_studentId).WithBusyIndicator(this), false);
         }
 
+        private void Validate()
+        {
+            Validator.ClearErrors();
+
+            if (string.IsNullOrEmpty(LastName))
+            {
+                Validator.SetErrors(nameof(LastName), UiResources.ErrorRequiredMessage);
+            }
+            else if (LastName.Length > 50)
+            {
+                Validator.SetErrors(nameof(LastName), string.Format(UiResources.ErrorMaxLengthFormat, 50));
+            }
+
+            if (string.IsNullOrEmpty(FirstName))
+            {
+                Validator.SetErrors(nameof(FirstName), UiResources.ErrorRequiredMessage);
+            }
+            else if (FirstName.Length > 50)
+            {
+                Validator.SetErrors(nameof(FirstName), string.Format(UiResources.ErrorMaxLengthFormat, 50));
+            }
+
+            if (string.IsNullOrEmpty(MiddleName))
+            {
+                Validator.SetErrors(nameof(MiddleName), UiResources.ErrorRequiredMessage);
+            }
+            else if (MiddleName.Length > 50)
+            {
+                Validator.SetErrors(nameof(MiddleName), string.Format(UiResources.ErrorMaxLengthFormat, 50));
+            }
+
+            if (BirthDate == null)
+            {
+                Validator.SetErrors(nameof(BirthDate), UiResources.ErrorRequiredMessage);
+            }
+            else if (BirthDate > DateTime.Now)
+            {
+                Validator.SetErrors(nameof(BirthDate), UiResources.ErrorDateMoreThanNowMessage);
+            }
+
+            if (Series != null && Series > 9999)
+            {
+                Validator.SetErrors(nameof(Series));
+            }
+
+            if (Number != null && Number > 999999)
+            {
+                Validator.SetErrors(nameof(Number));
+            }
+        }
+
         #endregion
 
-        #region Implements of IHasDisplayName
+        #region Implementation of IHasDisplayName
 
         public string DisplayName { get; set; } = UiResources.StudentCardName;
+
+        #endregion
+
+        #region Overrides of EditableViewModel
+
+        protected override void OnEntityInitialized()
+        {
+            base.OnEntityInitialized();
+
+            Validate();
+        }
 
         #endregion
     }

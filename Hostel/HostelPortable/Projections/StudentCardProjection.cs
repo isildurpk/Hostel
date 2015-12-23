@@ -17,7 +17,7 @@ namespace HostelPortable.Projections
 
         public Guid PassportId { get; set; }
 
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public string FirstName { get; set; }
 

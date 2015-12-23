@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="PortableModule.cs" />
