@@ -111,12 +111,24 @@ namespace HostelPortable.Infrastructure
                     p.Add("@IssueDate", projection.IssueDate);
                     p.Add("@IssuedBy", projection.IssuedBy);
 
-                    p.Add("@identity", direction:ParameterDirection.ReturnValue);
+                    p.Add("@identity", direction: ParameterDirection.ReturnValue);
 
                     conn.Open();
                     conn.Execute("AddNewStudent", p, commandType: CommandType.StoredProcedure);
 
                     projection.Id = p.Get<int>("@identity");
+                }
+            });
+        }
+
+        public Task<IList<LivingProjection>> LoadLivingProjectionsAsync(int studentId)
+        {
+            return Task.Factory.StartNew<IList<LivingProjection>>(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    conn.Open();
+                    return conn.Query<LivingProjection>("LoadLivingProjections", new { studentId }, commandType: CommandType.StoredProcedure).ToList();
                 }
             });
         }

@@ -13,5 +13,7 @@ namespace HostelPortable.Interfaces
         Task UpdateStudentCardAsync(StudentCardProjection projection);
 
         Task AddStudentAsync(StudentCardProjection projection);
+
+        Task<IList<LivingProjection>> LoadLivingProjectionsAsync(int studentId);
     }
 }

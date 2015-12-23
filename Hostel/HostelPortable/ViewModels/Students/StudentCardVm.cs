@@ -17,6 +17,7 @@ namespace HostelPortable.ViewModels.Students
         private readonly IRepository _repository;
 
         private int _studentId;
+        private Task _loadLivingsTask;
 
         #endregion
 
@@ -28,6 +29,7 @@ namespace HostelPortable.ViewModels.Students
 
             ApplyCommand = RelayCommandBase.FromAsyncHandler(ApplyAsync, CanApply, this);
             CancelCommand = new RelayCommand(Cancel, CanCancel, this);
+            AddLivingCommand = RelayCommandBase.FromAsyncHandler(AddLivingAsync, CanAddLiving, this);
         }
 
         #endregion
@@ -38,9 +40,11 @@ namespace HostelPortable.ViewModels.Students
 
         public ICommand CancelCommand { get; private set; }
 
+        public ICommand AddLivingCommand { get; private set; }
+
         #endregion
 
-        #region Properties
+        #region Entity properties
 
         public string Comment
         {
@@ -61,7 +65,6 @@ namespace HostelPortable.ViewModels.Students
             {
                 if (value == Entity.MedicalExamination) return;
                 Entity.MedicalExamination = value;
-                Validate();
                 OnPropertyChanged();
             }
         }
@@ -96,7 +99,6 @@ namespace HostelPortable.ViewModels.Students
             set
             {
                 Entity.SexId = value ? (byte) Sex.Female : (byte) Sex.Male;
-                Validate();
                 OnPropertyChanged();
             }
         }
@@ -199,6 +201,12 @@ namespace HostelPortable.ViewModels.Students
 
         #endregion
 
+        #region Properties
+
+        public GridViewModel<LivingProjection> LivingListVm { get; private set; }
+
+        #endregion
+
         #region Command`s methods
 
         private async Task ApplyAsync()
@@ -207,8 +215,10 @@ namespace HostelPortable.ViewModels.Students
             {
                 Entity.PassportId = Guid.NewGuid();
                 await _repository.AddStudentAsync(Entity).WithBusyIndicator(this);
+                _studentId = Entity.Id;
                 IsNewRecord = false;
                 OnPropertyChanged(nameof(IsNewRecord));
+                await _loadLivingsTask;
             }
             else
             {
@@ -235,6 +245,15 @@ namespace HostelPortable.ViewModels.Students
             return HasChanges;
         }
 
+        private async Task AddLivingAsync()
+        {
+        }
+
+        private bool CanAddLiving()
+        {
+            return LivingListVm != null;
+        }
+
         #endregion
 
         #region Methods
@@ -249,6 +268,10 @@ namespace HostelPortable.ViewModels.Students
 
             _studentId = studentId.Value;
             InitializeEntity(await _repository.GetStudentCardProjectionAsync(_studentId).WithBusyIndicator(this), false);
+
+            _loadLivingsTask = _repository.LoadLivingProjectionsAsync(_studentId)
+                .ContinueWith(task => LivingListVm.UpdateItemsSource(task.Result))
+                .WithBusyIndicator(this);
         }
 
         private void Validate()
@@ -339,6 +362,17 @@ namespace HostelPortable.ViewModels.Students
             base.OnEntityInitialized();
 
             Validate();
+        }
+
+        #endregion
+
+        #region Overrides of ViewModelBase
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            LivingListVm = GetViewModel<GridViewModel<LivingProjection>>();
         }
 
         #endregion

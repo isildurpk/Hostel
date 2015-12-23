@@ -113,6 +113,11 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="Image" x:Key="ToolBarSmallImageStyle" BasedOn="{StaticResource ToolBarImageStyle}">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor" />
+            <Setter Property="Height" Value="16" />
+        </Style>
+
         <Style TargetType="ComboBox" x:Key="EditorComboBoxStyle">
             <Setter Property="Margin" Value="{StaticResource DefaultMargin}" />
         </Style>

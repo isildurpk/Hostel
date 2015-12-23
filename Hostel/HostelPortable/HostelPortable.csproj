@@ -54,6 +54,7 @@
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="PortableModule.cs" />
+    <Compile Include="Projections\LivingProjection.cs" />
     <Compile Include="Projections\PassportProjection.cs" />
     <Compile Include="Projections\StudentCardProjection.cs" />
     <Compile Include="Projections\StudentProjection.cs" />

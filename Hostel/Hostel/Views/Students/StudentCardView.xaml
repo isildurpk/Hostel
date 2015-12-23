@@ -152,11 +152,34 @@
                         IsEnabled="{DataBinding '!IsNewRecord'}">
                 <TextBlock Text="Проживание" Style="{StaticResource CaptionTextBlockStyle}" />
 
-                <DataGrid Height="110" Style="{StaticResource DefaultGridStyle}">
+                <ToolBarTray Style="{StaticResource DefaultToolBarTrayStyle}" IsLocked="True">
+                    <ToolBarTray.Resources>
+                        <Style TargetType="Image" BasedOn="{StaticResource ToolBarSmallImageStyle}" />
+                    </ToolBarTray.Resources>
+
+                    <ToolBar OverflowMode="Never">
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Command="{Binding AddLivingCommand}"
+                                    Style="{StaticResource ImageToolbarButtonStyle}"
+                                    ToolTip="Добавить">
+                                <Image Source="/Hostel;component/Resources/Img/16/add.png" />
+                            </Button>
+
+                            <!--<Button Command="{Binding EditLivingCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                                    ToolTip="Редактировать">
+                                <Image Source="/Hostel;component/Resources/Img/16/edit.png" />
+                            </Button>-->
+
+                        </StackPanel>
+                    </ToolBar>
+                </ToolBarTray>
+
+                <DataGrid MinHeight="150" Style="{StaticResource DefaultGridStyle}" DataContext="{Binding LivingListVm}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Комната" />
-                        <DataGridTextColumn Header="Дата заселения" />
-                        <DataGridTextColumn Header="Дата выселения" />
+                        <DataGridTextColumn Header="Комната" Binding="{Binding RoomNumber}" />
+                        <DataGridTextColumn Header="Дата заселения" Binding="{Binding DateFrom, StringFormat=dd.MM.yyyy}" />
+                        <DataGridTextColumn Header="Дата выселения" Binding="{Binding DateTo, StringFormat=dd.MM.yyyy}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
