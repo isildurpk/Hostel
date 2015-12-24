@@ -9,10 +9,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ToolBarTray Style="{StaticResource DefaultToolBarTrayStyle}" IsLocked="True">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Фильтр:" Style="{StaticResource EditorTextBlockStyle}" />
+            <TextBox Style="{StaticResource EditorTextBoxStyle}" Text="{DataBinding FilterText, Mode=TwoWay}"
+                     Margin="6,3,3,3" Width="300" />
+        </StackPanel>
+
+        <ToolBarTray Grid.Row="1" Style="{StaticResource DefaultToolBarTrayStyle}" IsLocked="True">
             <ToolBarTray.Resources>
                 <Style TargetType="Image" BasedOn="{StaticResource ToolBarImageStyle}" />
             </ToolBarTray.Resources>
@@ -24,7 +31,7 @@
                             ToolTip="Добавить">
                         <Image Source="/Hostel;component/Resources/Img/24/add.png" />
                     </Button>
-                    
+
                     <Button Command="{Binding EditCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
                             ToolTip="Редактировать">
                         <Image Source="/Hostel;component/Resources/Img/24/edit.png" />
@@ -39,9 +46,8 @@
             </ToolBar>
         </ToolBarTray>
 
-        <DataGrid Grid.Row="1" DataContext="{Binding StudentsVm}" Style="{StaticResource DefaultGridStyle}"
+        <DataGrid Grid.Row="2" DataContext="{Binding StudentsVm}" Style="{StaticResource DefaultGridStyle}"
                   MouseDoubleClick="{DataBinding '$rel(UserControl).DataContext.EditCommand', ToggleEnabledState=False}">
-
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding FullName}" Header="ФИО" />
                 <DataGridTextColumn Binding="{Binding RoomNumber}" Header="Номер комнаты" />

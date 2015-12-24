@@ -171,6 +171,11 @@
                                 <Image Source="/Hostel;component/Resources/Img/16/edit.png" />
                             </Button>
 
+                            <Button Command="{Binding DeleteLivingCommand}" Style="{StaticResource ImageToolbarButtonStyle}"
+                                    ToolTip="Удалить">
+                                <Image Source="/Hostel;component/Resources/Img/16/delete.png" />
+                            </Button>
+
                         </StackPanel>
                     </ToolBar>
                 </ToolBarTray>

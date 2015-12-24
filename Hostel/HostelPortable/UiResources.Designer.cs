@@ -70,6 +70,24 @@ namespace HostelPortable {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удаление записи.
+        /// </summary>
+        internal static string DeleteCaption {
+            get {
+                return ResourceManager.GetString("DeleteCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы действительно хотите удалить запись?.
+        /// </summary>
+        internal static string DeleteMessage {
+            get {
+                return ResourceManager.GetString("DeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Редактирование записи.
         /// </summary>
         internal static string EditorName {

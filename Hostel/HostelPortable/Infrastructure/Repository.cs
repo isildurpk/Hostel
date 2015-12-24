@@ -167,6 +167,37 @@ namespace HostelPortable.Infrastructure
                 }
             });
         }
+
+        public Task DeleteLivingAsync(int livingId)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    conn.Open();
+                    conn.Execute("DeleteLiving", new { livingId }, commandType: CommandType.StoredProcedure);
+                }
+            });
+        }
+
+        public Task UpdateLivingAsync(LivingProjection projection)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                using (var conn = _getConnection())
+                {
+                    conn.Open();
+                    conn.Execute("UpdateLiving", new
+                    {
+                        projection.Id,
+                        projection.ContractNumber,
+                        projection.RoomId,
+                        projection.DateFrom,
+                        projection.DateTo
+                    }, commandType: CommandType.StoredProcedure);
+                }
+            });
+        }
     }
 
     #endregion

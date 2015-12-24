@@ -7,6 +7,7 @@ using HostelPortable.Interfaces;
 using HostelPortable.Projections;
 using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces.Models;
+using MugenMvvmToolkit.Interfaces.Presenters;
 using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
 
@@ -16,6 +17,7 @@ namespace HostelPortable.ViewModels.Students
     {
         #region Fields
 
+        private readonly IMessagePresenter _messagePresenter;
         private readonly IRepository _repository;
 
         private int _studentId;
@@ -24,14 +26,16 @@ namespace HostelPortable.ViewModels.Students
 
         #region Constructors
 
-        public StudentCardVm(IRepository repository)
+        public StudentCardVm(IMessagePresenter messagePresenter, IRepository repository)
         {
+            _messagePresenter = messagePresenter;
             _repository = repository;
 
             ApplyCommand = RelayCommandBase.FromAsyncHandler(ApplyAsync, CanApply, this);
             CancelCommand = new RelayCommand(Cancel, CanCancel, this);
             AddLivingCommand = RelayCommandBase.FromAsyncHandler(AddLivingAsync, CanAddLiving, this);
             EditLivingCommand = RelayCommandBase.FromAsyncHandler(EditLivingAsync, CanEditLiving, this);
+            DeleteLivingCommand = RelayCommandBase.FromAsyncHandler(DeleteLivingAsync, CanDeleteLiving, this);
         }
 
         #endregion
@@ -45,6 +49,8 @@ namespace HostelPortable.ViewModels.Students
         public ICommand AddLivingCommand { get; private set; }
 
         public ICommand EditLivingCommand { get; private set; }
+
+        public ICommand DeleteLivingCommand { get; private set; }
 
         #endregion
 
@@ -278,20 +284,38 @@ namespace HostelPortable.ViewModels.Students
             using (var vm = GetViewModel<StudentLivingEditorVm>())
             using (var wrapper = vm.Wrap<IEditorWrapperVm>())
             {
+                var projection = LivingListVm.SelectedItem;
+
                 vm.Initialize(LivingListVm.ItemsSource.Where(x => x != LivingListVm.SelectedItem));
-                vm.InitializeEntity(LivingListVm.SelectedItem, false);
+                vm.InitializeEntity(projection, false);
 
                 if (!await wrapper.ShowAsync())
                 {
                     return;
                 }
 
-
+                await _repository.UpdateLivingAsync(projection).WithBusyIndicator(this);
                 LoadLivings();
             }
         }
 
         private bool CanEditLiving()
+        {
+            return LivingListVm?.SelectedItem != null;
+        }
+
+        private async Task DeleteLivingAsync()
+        {
+            if (!await _messagePresenter.ShowDeleteQuestion())
+            {
+                return;
+            }
+
+            await _repository.DeleteLivingAsync(LivingListVm.SelectedItem.Id).WithBusyIndicator(this);
+            LivingListVm.ItemsSource.Remove(LivingListVm.SelectedItem);
+        }
+
+        private bool CanDeleteLiving()
         {
             return LivingListVm?.SelectedItem != null;
         }

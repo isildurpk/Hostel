@@ -13,6 +13,7 @@ namespace HostelPortable.ViewModels.Students
         #region Fields
 
         private readonly IRepository _repository;
+        private string _filterText;
 
         #endregion
 
@@ -42,6 +43,16 @@ namespace HostelPortable.ViewModels.Students
         #endregion
 
         #region Properties
+
+        public string FilterText
+        {
+            get { return _filterText; }
+            set
+            {
+                _filterText = value;
+                StudentsVm.UpdateFilter();
+            }
+        }
 
         public GridViewModel<StudentProjection> StudentsVm { get; private set; }
 
@@ -93,6 +104,9 @@ namespace HostelPortable.ViewModels.Students
             base.OnInitialized();
 
             StudentsVm = GetViewModel<GridViewModel<StudentProjection>>();
+            StudentsVm.Filter =
+                item => item != null && (string.IsNullOrEmpty(FilterText) || item.FullName.SafeContains(FilterText) ||
+                                         (item.RoomNumber != null && item.RoomNumber.ToString().SafeContains(FilterText)));
 
             _repository.LoadStudentProjectionsAsync().TryExecuteSynchronously(task => StudentsVm.UpdateItemsSource(task.Result))
                 .WithBusyIndicator(this);

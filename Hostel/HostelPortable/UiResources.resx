@@ -120,6 +120,12 @@
   <data name="DefaultBusyMessage" xml:space="preserve">
     <value>Загрузка...</value>
   </data>
+  <data name="DeleteCaption" xml:space="preserve">
+    <value>Удаление записи</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>Вы действительно хотите удалить запись?</value>
+  </data>
   <data name="EditorName" xml:space="preserve">
     <value>Редактирование записи</value>
   </data>
